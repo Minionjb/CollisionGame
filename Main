@@ -28,12 +28,7 @@ public class Main extends JApplet implements KeyListener {
 		return;
 	}
 	
-	public void paint(Graphics g){
-		g.setColor(Color.green);
-		g.fillRect(player1.getX(), player1.getY(), player1.getWidth(), player1.getHeight());
-		g.setColor(Color.red);
-		g.fillRect(enemy1.getX(), enemy1.getY(), enemy1.getWidth(), enemy1.getHeight());
-	}
+
 	public static void main(String[] args) {
 		JFrame f = new JFrame("CollisionTest");
 		f.addWindowListener(new WindowAdapter() {
