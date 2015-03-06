@@ -1,0 +1,91 @@
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.*;
+
+
+
+public class Main extends JApplet implements KeyListener {
+	static Main application = new Main();
+	static paintPanel panel = new paintPanel(1000,1000);
+	static Player player1 = new Player();
+	static Enemy enemy1 = new Enemy();
+	
+	public static void defaults(){
+		
+		player1.setX(400);
+		player1.setY(400);
+		player1.setWidth(100);
+		player1.setHeight(100);
+		
+		enemy1.setX(200);
+		enemy1.setY(200);
+		enemy1.setWidth(100);
+		enemy1.setHeight(100);
+		return;
+	}
+	
+	public void paint(Graphics g){
+		g.setColor(Color.green);
+		g.fillRect(player1.getX(), player1.getY(), player1.getWidth(), player1.getHeight());
+		g.setColor(Color.red);
+		g.fillRect(enemy1.getX(), enemy1.getY(), enemy1.getWidth(), enemy1.getHeight());
+	}
+	public static void main(String[] args) {
+		JFrame f = new JFrame("CollisionTest");
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		f.getContentPane().add(panel);
+	//	f.add(panel);
+		f.setSize(1000, 1000);
+		f.setLocation(100, 100);
+		f.setVisible(true);
+		f.addKeyListener(application);
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_UP: 
+				player1.setY(Main.player1.getY()-10);
+	        	System.out.println("Up Pressed");
+	        	panel.repaint();
+	            break;
+			case KeyEvent.VK_DOWN:
+	        	player1.setY(Main.player1.getY()+10);
+	        	System.out.println("Down Pressed");
+	        	panel.repaint();
+	        	break;
+			case KeyEvent.VK_RIGHT:
+	        	player1.setX(Main.player1.getX()+10);
+	        	System.out.println("Right Pressed");
+	        	panel.repaint();
+	            break;
+			case KeyEvent.VK_LEFT:
+	        	player1.setX(Main.player1.getX()-10);
+	        	System.out.println("Left Pressed");
+	        	panel.repaint();
+	            break;
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
